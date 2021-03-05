@@ -1,9 +1,11 @@
 import React from "react";
-
+import PhotoList from "./components/PhotoList/PhotoList";
 
 const App = () => {
   return (
-    <div className="App"></div>
+    <div className="App">
+      <PhotoList />
+    </div>
   );
 }
 
