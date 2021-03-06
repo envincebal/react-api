@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
-import PhotoItem from "../PhotoItem/PhotoItem";
-import "./PhotoList.css"
-
+const API_KEY = "oi1hSplSQS_hI67jQphH7UyZTPrpDo61GLyja7nCFeY";
 class PhotoList extends Component {
   constructor() {
     super();
@@ -13,34 +11,22 @@ class PhotoList extends Component {
 
   componentDidMount = async () => {
 
-    const data = await axios.get(`https://api.pexels.com/v1/curated`,{
+    const data = await axios.get("https://api.unsplash.com/photos",{
       headers: {
-        Authorization: "563492ad6f917000010000017c3eef529ca946b996dda3d9a84b79f4"
+        Authorization: "Client-ID " + API_KEY
       }
     });
-    this.setState({
-      photos: data.data.photos
-    })
+
+    console.log(data);
   }
 
   render() {
-    const {photos} = this.state;
     return (
       <div>
-        <p className="title">We have {photos.length} photos</p>
-        <div className="photos">
-          {
-          photos.map(photo => {
-            return (
-              <PhotoItem 
-              key={photo.id}
-              photo={photo} />
-            );
-          })
-        }
-        </div>
+        <h1>Hello</h1>
       </div>
-    );
+    )
+
   }
 }
 
