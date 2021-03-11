@@ -3,6 +3,7 @@ import PhotoItem from "../PhotoItem/PhotoItem";
 import PhotoForm from "../PhotoForm/PhotoForm";
 import api from '../../api/api';
 import lodash from "lodash";
+import StackGrid from "react-stack-grid";
 
 class PhotoList extends Component {
   constructor() {
@@ -20,6 +21,12 @@ class PhotoList extends Component {
     this.setState({photos})
   }
 
+  handleInput = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
   render() {
     const sorted = lodash.orderBy(this.state.photos, [this.state.sortTerm], [this.state.sortOrder]);
 
@@ -28,8 +35,13 @@ class PhotoList extends Component {
 
       return (
       <React.Fragment>
-        <PhotoForm />
+        <PhotoForm onchange={this.handleInput} />
         <div>
+          <StackGrid
+            columnWidth={400}
+            gutterWidth={15}
+            gutterHeight={25}
+          >
         {
           sorted.map(photo => (
             <PhotoItem 
@@ -37,6 +49,8 @@ class PhotoList extends Component {
               photo={photo} />
           ))
         }
+          </StackGrid>
+
         </div>
       </React.Fragment>
 

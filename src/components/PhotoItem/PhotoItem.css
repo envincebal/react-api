@@ -1,0 +1,30 @@
+.photo-item {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.photo-img{
+  width: 70%;
+}
+
+.photo-content{
+  padding-left: .6rem;
+}
+
+.photo-user{
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.photo-buttons{
+  display: flex;
+  justify-content: space-around;
+}
+
+.photo-btn{
+  text-decoration: none;
+  background-color: #000;
+  color: #fff;
+  padding: 0.7rem 1rem;
+  margin: 1.5rem 0;
+}

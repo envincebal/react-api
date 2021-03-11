@@ -7,3 +7,4 @@ export default axios.create({
     Authorization: "Client-ID " + API_KEY
   }
 });
+
