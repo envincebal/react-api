@@ -1,41 +1,45 @@
 import React, {Component} from "react";
-import axios from "axios";
 import PhotoItem from "../PhotoItem/PhotoItem";
-const API_KEY = "oi1hSplSQS_hI67jQphH7UyZTPrpDo61GLyja7nCFeY";
+import PhotoForm from "../PhotoForm/PhotoForm";
+import api from '../../api/api';
+import lodash from "lodash";
 
 class PhotoList extends Component {
   constructor() {
     super();
     this.state = {
-      photos: []
+      photos: [],
+      sortTerm: "",
+      sortOrder: "asc"
     }
   }
 
-  componentDidMount = async() => {
-
-    const {data: photos} = await axios.get("https://api.unsplash.com/photos", {
-      headers: {
-        Authorization: "Client-ID " + API_KEY
-      }
-    });
+  componentDidMount = async () => {
+    const {data: photos} = await api.get("/photos");
 
     this.setState({photos})
   }
 
   render() {
+    const sorted = lodash.orderBy(this.state.photos, [this.state.sortTerm], [this.state.sortOrder]);
+
     if (this.state.photos.length === 0) 
       return <div className="loading">Loading</div>
-    
+
       return (
-      <div>
-      {
-        this.state.photos.map(photo => (
-          <PhotoItem 
-            key={photo.id}
-            photo={photo} />
-        ))
-      }
-      </div>
+      <React.Fragment>
+        <PhotoForm />
+        <div>
+        {
+          sorted.map(photo => (
+            <PhotoItem 
+              key={photo.id}
+              photo={photo} />
+          ))
+        }
+        </div>
+      </React.Fragment>
+
     )
 
   }
